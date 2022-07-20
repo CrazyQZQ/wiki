@@ -2,7 +2,7 @@
 title: mysql踩坑
 description: mysql使用时遇到的问题
 published: true
-date: 2022-07-20T02:53:06.495Z
+date: 2022-07-20T02:53:39.545Z
 tags: mysql
 editor: markdown
 dateCreated: 2022-04-30T14:09:44.906Z
@@ -12,14 +12,14 @@ dateCreated: 2022-04-30T14:09:44.906Z
 
 ## 1、关闭密码模式
 
-```plaintext
+```
 cd /etc/my.cnf.d/
 vim mysql-server.cnf
 ```
 
 增加如下配置
 
-```plaintext
+```
 skip-grant-tables
 ```
 
@@ -45,14 +45,14 @@ localhost为本地权限(不可远程访问）
 
 **查看用户：**
 
-```plaintext
+```
 user mysql;
 select host, user, authentication_string, plugin from user;
 ```
 
 **用户授权：**
 
-```plaintext
+```
 grant #auth on #databaseName.#table to '#userName'@'#host';
 ```
 
@@ -86,12 +86,12 @@ localhost为本地权限(不可远程访问)
 
 **切记一定要刷新授权才可生效：**
 
-```plaintext
+```
 flush privileges;
 ```
 
 **查看用户权限：**
 
-```plaintext
+```
 show grants for '#userName'@'#host';
 ```
