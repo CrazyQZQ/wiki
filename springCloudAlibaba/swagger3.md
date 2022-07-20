@@ -2,7 +2,7 @@
 title: spring cloud集成swagger3
 description: spring cloud集成swagger3
 published: true
-date: 2022-07-20T05:30:07.142Z
+date: 2022-07-20T05:38:27.006Z
 tags: 
 editor: markdown
 dateCreated: 2022-07-19T11:39:34.108Z
@@ -290,3 +290,4 @@ oauth2:
                     - /favicon.ico
 ```
 3. 访问<http://{gateWay-ip}:{port}/doc.html>
+![文档主页](http://124.221.239.207:9000/wiki/api-doc.png){.elevation-3 .radius-5}
