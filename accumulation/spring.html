@@ -1,0 +1,18 @@
+<!--
+title: spring积累
+description: 
+published: true
+date: 2022-04-30T14:25:43.777Z
+tags: spring
+editor: ckeditor
+dateCreated: 2022-04-30T14:25:42.394Z
+-->
+
+<h2>如何自动配置依赖的项目的bean</h2>
+<p>只需要在被依赖项目中resource下添加META-INFO文件夹，在文件夹中添加文件spring.factories</p>
+<p>文件内容：</p>
+<pre><code class="language-plaintext">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.qq.common.system.service.impl.SysAccountServiceImpl,\
+  com.qq.common.system.service.impl.SysMenuServiceImpl</code></pre>
+<p>此时启动项目时会自动扫描并装配已经配置的bean</p>
+<p>&nbsp;</p>

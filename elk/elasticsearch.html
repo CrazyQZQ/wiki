@@ -1,0 +1,94 @@
+<!--
+title: elasticsearch安装
+description: elasticsearch安装
+published: true
+date: 2022-07-05T07:00:12.541Z
+tags: 
+editor: ckeditor
+dateCreated: 2022-05-07T11:40:44.139Z
+-->
+
+<h1>docker安装启动es</h1>
+<p>1、为 Elasticsearch 和 Kibana 创建一个新的 Docker 网络</p>
+<pre><code class="language-plaintext">docker network create elastic</code></pre>
+<p>2、在 Docker 中启动 Elasticsearch。将为用户生成密码并输出到终端，以及用于注册 Kibana 的注册令牌。（docker logs 查看日志输出，找到密码）</p>
+<pre><code class="language-plaintext">docker run --name es01 --net elastic -p 9200:9200 -p 9300:9300 -it docker.elastic.co/elasticsearch/elasticsearch:8.1.3</code></pre>
+<p>3、重置密码</p>
+<pre><code class="language-plaintext">docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic</code></pre>
+<p>4、将安全证书从 Docker 容器复制到本地计算机。http_ca.crt</p>
+<pre><code class="language-plaintext">docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt /home/qqWorkSpace/elk/elasticsearch/</code></pre>
+<p>5、打开一个新终端，并使用从 Docker 容器复制的文件，通过进行经过身份验证的调用来验证是否可以连接到 Elasticsearch 集群。出现提示时，输入用户的密码。</p>
+<pre><code class="language-plaintext">curl --cacert /home/qqWorkSpace/elk/elasticsearch/http_ca.crt -u elastic https://localhost:9200</code></pre>
+<h2>安装kibana</h2>
+<p>1、拉取镜像</p>
+<pre><code class="language-plaintext">docker pull docker.elastic.co/kibana/kibana:8.1.3</code></pre>
+<p>2、启动容器</p>
+<pre><code class="language-plaintext">docker run --name kib01 --net elastic -p 5601:5601 -it docker.elastic.co/kibana/kibana:8.1.3</code></pre>
+<h1>es的配置</h1>
+<p>Elasticsearch有三个配置文件：</p>
+<ol>
+  <li>elasticsearch.yml用于配置 Elasticsearch</li>
+  <li>jvm.options用于配置 Elasticsearch JVM 设置</li>
+  <li>log4j2.properties用于配置 Elasticsearch 日志记录</li>
+</ol>
+<p>&nbsp;进入容器内部：</p>
+<pre><code class="language-plaintext">docker exec -it 6f0e7f387863 /bin/bash</code></pre>
+<p>进入文件夹 usr/share/elasticsearch/config 可以看到配置文件</p>
+<pre><code class="language-plaintext">cd /usr/share/elasticsearch/config</code></pre>
+<p>使用如下可以把修改后的文件复制进容器</p>
+<pre><code class="language-plaintext">docker cp /home/qqWorkSpace/elk/elasticsearch/elasticsearch.yml es01:/usr/share/elasticsearch/config/</code></pre>
+<h1>使用docker-elk</h1>
+<h2>使用github上docker镜像</h2>
+<p>1、下载后使用如下命令（需要安装docker和docker-compose）</p>
+<pre><code class="language-plaintext">&gt;cd docker-elk
+&gt;docker-compose up -d</code></pre>
+<p>2、.env中可以为内置用户配置密码</p>
+<p>3、配置logstash 管道</p>
+<pre><code class="language-plaintext">&gt;cd docker-elk/logstash/pipeline</code></pre>
+<p>4、管道配置示例：logstash.conf</p>
+<pre><code class="language-plaintext">input {
+#	beats {
+#		port =&gt; 5044
+#	}
+
+#	tcp {
+#		port =&gt; 5000
+#	}
+    redis {
+        batch_count =&gt; 1
+        data_type =&gt; "list"
+        key =&gt; "logs"
+        host =&gt; "1.13.17.66"
+        port =&gt; 6379
+        password =&gt; "qq123456"
+        threads =&gt; 5
+    }
+}
+
+## Add your filters / logstash plugins configuration here
+
+output {
+	elasticsearch {
+		hosts =&gt; "elasticsearch:9200"
+        index =&gt; "logs-%{+YYYY.MM.dd}"
+		user =&gt; "logstash_internal"
+		password =&gt; "${LOGSTASH_INTERNAL_PASSWORD}"
+	}
+}
+</code></pre>
+<h2>安装IK分词器</h2>
+<p>1、下载对应es版本：<a href="https://github.com/medcl/elasticsearch-analysis-ik/releases">Releases · medcl/elasticsearch-analysis-ik (github.com)</a></p>
+<p>2、进入容器内部，mkdir /usr/share/elasticsearch/plugins/ik</p>
+<p>docker cp /tmp/elasticsearch-analysis-ik-8.1.3.zip elasticsearch:/usr/share/elasticsearch/plugins/ik</p>
+<p>3、重启es</p>
+<pre><code class="language-plaintext">curl -XPOST http://localhost:9200/index/_mapping -H 'Content-Type:application/json' -d'
+{
+        "properties": {
+            "content": {
+                "type": "text",
+                "analyzer": "ik_max_word",
+                "search_analyzer": "ik_smart"
+            }
+        }
+
+}'</code></pre>

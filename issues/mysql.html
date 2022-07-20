@@ -1,0 +1,50 @@
+<!--
+title: mysql踩坑
+description: mysql使用时遇到的问题
+published: true
+date: 2022-04-30T14:10:22.933Z
+tags: mysql
+editor: ckeditor
+dateCreated: 2022-04-30T14:09:44.906Z
+-->
+
+<h1>创建用户，修改密码</h1>
+<h2>1、关闭密码模式</h2>
+<pre><code class="language-plaintext">cd /etc/my.cnf.d/
+vim mysql-server.cnf</code></pre>
+<p>增加如下配置</p>
+<pre><code class="language-plaintext">skip-grant-tables</code></pre>
+<h2>2、进入mysql&nbsp;</h2>
+<pre><code class="language-plaintext">mysql -u root</code></pre>
+<p><strong>创建用户：</strong></p>
+<pre><code class="language-plaintext">create user '#userName'@'#host' identified by '#passWord';</code></pre>
+<p>#userName 代表你要创建的此数据库的新用户账号</p>
+<p>#host 代表访问权限，如下</p>
+<p>%代表通配所有host地址权限(可远程访问)</p>
+<p>localhost为本地权限(不可远程访问）</p>
+<p><strong>查看用户：</strong></p>
+<pre><code class="language-plaintext">user mysql;
+select host, user, authentication_string, plugin from user;</code></pre>
+<p><strong>用户授权：</strong></p>
+<pre><code class="language-plaintext">grant #auth on #databaseName.#table to '#userName'@'#host';</code></pre>
+<p>#auth 代表权限，如下</p>
+<p>all privileges 全部权限</p>
+<p>select 查询权限</p>
+<p>select,insert,update,delete 增删改查权限</p>
+<p>select,[…]增…等权限</p>
+<p>#databaseName 代表数据库名</p>
+<p>#table 代表具体表，如下</p>
+<p>*代表全部表</p>
+<p>A,B 代表具体A,B表</p>
+<p>#userName 代表用户名</p>
+<p>#host 代表访问权限，如下</p>
+<p>%代表通配所有host地址权限(可远程访问)</p>
+<p>localhost为本地权限(不可远程访问)</p>
+<p>指定特殊Ip访问权限 如10.138.106.102</p>
+<p><strong>切记一定要刷新授权才可生效：</strong></p>
+<pre><code class="language-plaintext">flush privileges;</code></pre>
+<p><strong>查看用户权限：</strong></p>
+<pre><code class="language-plaintext">show grants for '#userName'@'#host';</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

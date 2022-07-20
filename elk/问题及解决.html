@@ -1,0 +1,46 @@
+<!--
+title: 问题及解决
+description: 
+published: true
+date: 2022-07-04T02:15:24.173Z
+tags: 
+editor: ckeditor
+dateCreated: 2022-07-04T02:14:56.715Z
+-->
+
+<h2>许可证过期</h2>
+<p><mark class="pen-red">错误描述</mark>：</p>
+<pre><code class="language-plaintext">{
+     "error": {
+          "root_cause": [
+               {
+                    "type": "security_exception",
+                    "reason": "current license is non-compliant for [security]",
+                    "license.expired.feature": "security",
+                    "suppressed": [
+                         {
+                              "type": "security_exception",
+                              "reason": "current license is non-compliant for [security]",
+                              "license.expired.feature": "security"
+                         }
+                    ]
+               }
+          ],
+          "type": "security_exception",
+          "reason": "current license is non-compliant for [security]",
+          "license.expired.feature": "security",
+          "suppressed": [
+               {
+                    "type": "security_exception",
+                    "reason": "current license is non-compliant for [security]",
+                    "license.expired.feature": "security"
+               }
+          ]
+     },
+     "status": 403
+}</code></pre>
+<p>原因：ES的X-pack许可证是提供免费一个月的试用，但是到期之后，就会报这个错误，需要去es官网注册个账号，然后申请一个新的license，但是注册license 页面上面写着，6.3版本以后，Elastic Stack的默认发行版中包含基本（免费）层功能。无需许可证注册，也就是说，我现在用的6.7.2版本并不需要更新，只需要降级到基础版本即可</p>
+<p><mark class="pen-green">解决方法</mark>：</p>
+<pre><code class="language-plaintext">POST /_license/start_basic?acknowledge=true
+或
+curl -XPOST "http://127.0.0.1:9200/_license/start_basic?acknowledge=true"</code></pre>
