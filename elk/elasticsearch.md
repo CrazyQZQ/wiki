@@ -2,7 +2,7 @@
 title: elasticsearch安装
 description: elasticsearch安装
 published: true
-date: 2022-07-20T03:04:51.546Z
+date: 2022-07-20T03:05:29.376Z
 tags: 
 editor: markdown
 dateCreated: 2022-05-07T11:40:44.139Z
@@ -84,7 +84,7 @@ docker cp /home/qqWorkSpace/elk/elasticsearch/elasticsearch.yml es01:/usr/share/
 
 ## 使用github上docker镜像
 ### 准备：安装docker
-> [安装docker](/acculation/docker)
+> [安装docker](/zh/accumulation/docker)
 1. 下载后使用如下命令（需要安装docker和docker-compose）
 
 ```
