@@ -2,7 +2,7 @@
 title: minIO的使用
 description: minIO的安装，使用，java API
 published: true
-date: 2022-07-20T02:56:27.709Z
+date: 2022-07-20T02:57:15.595Z
 tags: 
 editor: markdown
 dateCreated: 2022-05-07T12:07:31.953Z
@@ -12,13 +12,13 @@ dateCreated: 2022-05-07T12:07:31.953Z
 
 参考：https://www.hxstrive.com/subject/minio.htm
 
-1、拉取docker镜像
+1. 拉取docker镜像
 
 ```plaintext
 >docker pull minio/minio
 ```
 
-2、设置minio用到的文件路径
+2. 设置minio用到的文件路径
 
 ```plaintext
 >mkdir minio
@@ -27,7 +27,7 @@ dateCreated: 2022-05-07T12:07:31.953Z
 >mkdir config
 ```
 
-3、启动服务：注意，这里要单独设置console的端口，不然会报错，且无法访问
+3. 启动服务：注意，这里要单独设置console的端口，不然会报错，且无法访问
 
 ```plaintext
 >docker run --name minio \
@@ -44,7 +44,7 @@ minio/minio server /data \
 
 这种安装方式 MinIO 自定义 Access 和 Secret 密钥要覆盖 MinIO 的自动生成的密钥
 
-4、 防火墙设置，需要为minio开放两个端口，一个9000端口，一个静态端口，此处为9999
+4. 防火墙设置，需要为minio开放两个端口，一个9000端口，一个静态端口，此处为9999
 
 ```plaintext
 >firewall-cmd --zone=public --add-port=9000/tcp --permanent
@@ -52,13 +52,13 @@ minio/minio server /data \
 >firewall-cmd --reload
 ```
 
-5.、登录客户端（浏览器）：注意—>此处的端口，是你设置的console的端口：9999
+5. 登录客户端（浏览器）：注意—>此处的端口，是你设置的console的端口：9999
 
 此处的用户名密码为启动服务时，设置的用户名密码：`admin`  `qq123456`
 
 # java API的使用
 
-1、引入依赖
+1. 引入依赖
 
 ```xml
 <dependency>
@@ -68,7 +68,7 @@ minio/minio server /data \
 </dependency>
 ```
 
-2、配置
+2. 配置
 
 ```java
 minio:
@@ -78,7 +78,7 @@ minio:
     secretKey: qq123456
 ```
 
-3、示例
+3. 示例
 
 ```java
 package com.qq.common.system.service.impl;
