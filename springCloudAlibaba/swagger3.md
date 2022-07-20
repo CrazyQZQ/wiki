@@ -2,7 +2,7 @@
 title: spring cloud集成swagger3
 description: spring cloud集成swagger3
 published: true
-date: 2022-07-19T11:39:36.082Z
+date: 2022-07-20T05:30:07.142Z
 tags: 
 editor: markdown
 dateCreated: 2022-07-19T11:39:34.108Z
@@ -115,7 +115,7 @@ public class Swagger3Config implements EnvironmentAware {
     }
 }
 ```
-3. 访问<http://{ip}:{port}/swagger-ui/>访问
+3. 访问<http://{ip}:{port}/swagger-ui/>
 
 ## gateWay集成
 1. 同样引入依赖
@@ -253,5 +253,40 @@ spring:
                     filters:
                         - RewritePath=/system/v3/api-docs, /v3/api-docs
 ```
-5. 访问<http://{gateWay-ip}:{port}/swagger-ui/>访问
+5. 访问<http://{gateWay-ip}:{port}/swagger-ui/>
 
+## 使用SpringDoc UI界面
+1. gateWay 引入依赖
+```xml
+<dependency>
+  <groupId>com.github.xiaoymin</groupId>
+  <artifactId>knife4j-spring-boot-starter</artifactId>
+  <version>3.0.3</version>
+</dependency>
+```
+2. 放行相关路径
+```yml
+oauth2:
+    cloud:
+        sys:
+            parameter:
+                ignoreUrls:
+                    - /oauth/**
+                    - /system/login
+                    - /system/client_login
+                    - /system/*.html
+                    - /system/*.js
+                    - /system/*.css
+                    - /system/favicon.ico
+                    - /system/v3/api-docs
+                    - /account/v3/api-docs
+                    - /order/v3/api-docs
+                    - /product/v3/api-docs
+                    - /search/v3/api-docs
+                    - /swagger-ui/**
+                    - /swagger-resources/**
+                    - /doc.html
+                    - /webjars/**
+                    - /favicon.ico
+```
+3. 访问<http://{gateWay-ip}:{port}/doc.html>
