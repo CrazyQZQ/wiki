@@ -2,13 +2,13 @@
 title: centOS8安装使用code-server
 description: centOS8安装使用code-server
 published: true
-date: 2022-07-20T11:31:57.124Z
+date: 2022-07-20T11:32:33.115Z
 tags: 
 editor: markdown
 dateCreated: 2022-07-20T11:31:57.124Z
 ---
 
-# centOS8安装使用code-server
+# CentOS8安装使用code-server
 ## 安装
 [官方文档](https://coder.com/docs/code-server/latest/install#fedora-centos-rhel-suse)
 ### 本地使用rpm安装
