@@ -2,7 +2,7 @@
 title: spring积累
 description: 
 published: true
-date: 2022-07-20T03:08:16.638Z
+date: 2022-07-20T03:08:52.291Z
 tags: spring
 editor: markdown
 dateCreated: 2022-04-30T14:25:42.394Z
@@ -14,7 +14,7 @@ dateCreated: 2022-04-30T14:25:42.394Z
 
 文件内容：
 
-```plaintext
+```
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.qq.common.system.service.impl.SysAccountServiceImpl,\
   com.qq.common.system.service.impl.SysMenuServiceImpl
