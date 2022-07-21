@@ -2,7 +2,7 @@
 title: spring cloud alibaba issues
 description: 
 published: true
-date: 2022-07-20T02:54:13.179Z
+date: 2022-07-21T06:45:15.495Z
 tags: 
 editor: markdown
 dateCreated: 2022-05-02T14:56:06.302Z
@@ -74,3 +74,26 @@ private ServerHttpResponseDecorator printLog(ServerWebExchange exchange){
         return decoratedResponse;
     }
 ```
+## element-ui 文件上传跨域问题
+error：Allow-Origin header contains multiple values... but only one is allowed
+解决方式：
+gateway模块增加filters:`DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin`
+```yaml
+spring:
+    application:
+        name: gateway-server
+    main:
+        allow-bean-definition-overriding: true
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+            routes:
+                -   id: system_server
+                    uri: lb://system-server
+                    predicates:
+                        - Path=/system/**
+                    filters:
+                        - RewritePath=/system/v3/api-docs, /v3/api-docs
+                        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
