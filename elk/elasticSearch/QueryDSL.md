@@ -2,7 +2,7 @@
 title: Elastic Search Query Dsl
 description: Elastic Search查询语句
 published: true
-date: 2022-07-26T12:06:31.726Z
+date: 2022-07-27T12:20:04.646Z
 tags: 
 editor: markdown
 dateCreated: 2022-07-26T12:06:31.726Z
@@ -80,3 +80,75 @@ GET /_search
 }
 ```
 *解释*：包装筛选查询，并返回*相关性分数*等于参数值的每个匹配文档。
+### 查找多个精确值（terms）
+```
+GET /my_store/products/_search
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "terms" : { 
+                    "price" : [20, 30]
+                }
+            }
+        }
+    }
+}
+```
+*解释* 查找价格字段值包含 20 或 30
+`term`和`terms`是 包含（contains） 操作，而非 等值（equals）。
+如果我们有一个 term（词项）过滤器 { "term" : { "tags" : "search" } } ，它会与以下两个文档 同时 匹配：
+```
+{ "tags" : ["search"] }
+{ "tags" : ["search", "open_source"] }
+```
+尽管第二个文档包含除 search 以外的其他词，它还是被匹配并作为结果返回。
+### 范围（range）
++ `gt`: `>`大于（greater than）
++ `lt`: `<` 小于（less than）
++ `gte`: `>=` 大于或等于（greater than or equal to）
++ `lte`: `<=` 小于或等于（less than or equal to）
+如果想要范围无界（比方说 >20 ），只须省略其中一边的限制
+#### 日期范围
+1. 直接使用字符串比较
+```
+"range" : {
+    "timestamp" : {
+        "gt" : "2014-01-01 00:00:00",
+        "lt" : "2014-01-07 00:00:00"
+    }
+}
+```
+2. 日期计算
++ 这个过滤器会一直查找时间戳在过去一个小时内的所有文档，让过滤器作为一个时间 *滑动窗口（sliding window）* 来过滤文档。
+```
+"range" : {
+    "timestamp" : {
+        "gt" : "now-1h"
+    }
+}
+```
++ 日期计算还可以被应用到某个具体的时间，并非只能是一个像 now 这样的占位符。只要在某个日期后加上一个双管符号 (`||`) 并紧跟一个日期数学表达式就能做到：
+```
+"range" : {
+    "timestamp" : {
+        "gt" : "2014-01-01 00:00:00",
+        "lt" : "2014-01-01 00:00:00||+1M" 
+    }
+}
+```
+#### 字符串范围
+`range`查询同样可以处理字符串字段，字符串范围可采用 *字典顺序（lexicographically）* 或 *字母顺序（alphabetically）* 。例如，下面这些字符串是采用字典序（lexicographically）排序的：
+
++ 5, 50, 6, B, C, a, ab, abb, abc, b
+
+如果我们想查找从`a`到`b`（不包含）的字符串，同样可以使用 `range` 查询语法：
+```
+"range" : {
+    "title" : {
+        "gte" : "a",
+        "lt" :  "b"
+    }
+}
+```
+
