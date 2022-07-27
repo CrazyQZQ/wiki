@@ -1,14 +1,14 @@
 ---
-title: Elastic Search Query Dsl
+title: 结构化搜索
 description: Elastic Search查询语句
 published: true
-date: 2022-07-27T12:20:04.646Z
+date: 2022-07-27T12:20:59.617Z
 tags: 
 editor: markdown
 dateCreated: 2022-07-26T12:06:31.726Z
 ---
 
-# 查询和过滤
+# 结构化搜索
 > [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html){.isInfo}
 ## 查询和筛选上下文
 ```console
