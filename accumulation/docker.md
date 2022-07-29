@@ -1,9 +1,9 @@
 ---
-title: docker
+title: docker安装
 description: docker的使用（linux）
 published: true
-date: 2022-07-29T02:58:51.889Z
-tags: 
+date: 2022-07-29T02:59:51.742Z
+tags: docker
 editor: markdown
 dateCreated: 2022-05-07T11:33:49.182Z
 ---
