@@ -2,7 +2,7 @@
 title: jenkins安装
 description: docker安装jenkins
 published: true
-date: 2022-07-29T03:28:09.515Z
+date: 2022-07-29T03:29:29.747Z
 tags: docker, jenkins
 editor: markdown
 dateCreated: 2022-07-29T03:15:34.265Z
