@@ -2,7 +2,7 @@
 title: docker
 description: docker的使用（linux）
 published: true
-date: 2022-07-20T02:59:43.993Z
+date: 2022-07-29T02:58:51.889Z
 tags: 
 editor: markdown
 dateCreated: 2022-05-07T11:33:49.182Z
@@ -44,6 +44,13 @@ yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 ```
 systemctl start docker
+```
+
+安装报错：
+`problem with installed package podman-1.6.4-10.module_el8.2.0+305+5e198a41.x86_64`
+输入一下命令继续安装：
+```bash
+yum install --allowerasing docker-ce
 ```
 
 # 常用命令
