@@ -2,7 +2,7 @@
 title: jenkins安装
 description: docker安装jenkins
 published: true
-date: 2022-07-29T03:15:34.265Z
+date: 2022-07-29T03:28:09.515Z
 tags: docker, jenkins
 editor: markdown
 dateCreated: 2022-07-29T03:15:34.265Z
@@ -30,3 +30,9 @@ docker run -d -p 8090:8080 -p 8091:50000 -v /home/qqWorkspace/jenkins_home:/var/
 - `-v /data/jenkins_home:/var/jenkins_home`挂载目录
 - `-v /etc/localtime:/etc/localtime`让容器使用和服务器同样的时间设置。
 - `–name jenkins01`别名
+4. 登录 {$ip}:8090
+![登录首页](http://124.221.239.207:9000/wiki/jenkins-login.png "jenkins-login")
+复制管理员密码
+```bash
+cat /home/qqWorkspace/jenkins_home/secrets/initialAdminPassword
+```
