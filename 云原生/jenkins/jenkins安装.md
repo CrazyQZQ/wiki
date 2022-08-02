@@ -2,7 +2,7 @@
 title: jenkins安装
 description: docker安装jenkins
 published: true
-date: 2022-07-29T03:29:29.747Z
+date: 2022-08-02T09:28:01.800Z
 tags: docker, jenkins
 editor: markdown
 dateCreated: 2022-07-29T03:15:34.265Z
@@ -25,8 +25,8 @@ chmod 777 /home/qqWorkspace/jenkins_home
 docker run -d -p 8090:8080 -p 8091:50000 -v /home/qqWorkspace/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins01 jenkins/jenkins
 ```
 - `-d` 后台运行镜像
-- `-p 8090:8080` 将镜像的8080端口映射到服务器的10240端口。
-- `-p 8091:50000` 将镜像的50000端口映射到服务器的10241端口
+- `-p 8090:8080` 将镜像的8080端口映射到服务器的8090端口。
+- `-p 8091:50000` 将镜像的50000端口映射到服务器的8091端口
 - `-v /data/jenkins_home:/var/jenkins_home`挂载目录
 - `-v /etc/localtime:/etc/localtime`让容器使用和服务器同样的时间设置。
 - `–name jenkins01`别名
