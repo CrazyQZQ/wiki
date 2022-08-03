@@ -2,7 +2,7 @@
 title: jenkins配置
 description: jenkins配置及构建
 published: true
-date: 2022-08-03T01:54:36.442Z
+date: 2022-08-03T02:59:06.548Z
 tags: jenkins
 editor: markdown
 dateCreated: 2022-08-03T01:54:36.442Z
@@ -26,7 +26,7 @@ Manager Jenkins > Global Tool Configuration
 ![新增ssh](http://124.221.239.207:9000/wiki/item_setting.jpeg)
 注意：*源码管理 git* 需要使用私钥
 ```bash
-cat /root/.ssh/is_rsa
+cat /root/.ssh/id_rsa
 ```
 
 
