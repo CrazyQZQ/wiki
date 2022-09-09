@@ -2,7 +2,7 @@
 title: minIO的使用
 description: minIO的安装，使用，java API
 published: true
-date: 2022-07-20T02:57:15.595Z
+date: 2022-09-09T14:24:04.323Z
 tags: 
 editor: markdown
 dateCreated: 2022-05-07T12:07:31.953Z
@@ -248,3 +248,41 @@ public class MinIoServiceImpl implements MinIoService {
     }
 }
 ```
+# 配置https访问
+[官方文档](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls.html)
+{.is-info}
+1. 进入挂载目录
+```bash
+cd /home/qqWorkspace/minIO/config/certs
+```
+2. 创建`openssl.conf`文件，写入一下内容
+```
+[req]
+distinguished_name = req_distinguished_name
+x509_extensions = v3_req
+prompt = no
+
+[req_distinguished_name]
+C = US
+ST = VA
+L = Somewhere
+O = MyOrg
+OU = MyOU
+CN = MyServerName
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+IP.1 = 127.0.0.1
+DNS.1 = localhost
+```
+3. 生成公钥和私钥
+```bash
+openssl req -new -x509 -nodes -days 730 -keyout private.key -out public.crt -config openssl.conf
+```
+4. 重启minIO
+```bash
+docker restart minio
+```
+此时可以使用https方式访问
