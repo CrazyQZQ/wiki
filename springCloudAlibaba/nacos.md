@@ -1,8 +1,8 @@
 ---
-title: nacos的使用
+title: 组件：nacos的使用
 description: nacos作为配置中心、注册中心
 published: true
-date: 2022-07-19T11:44:50.997Z
+date: 2022-09-22T07:33:56.355Z
 tags: spring cloud alibaba
 editor: markdown
 dateCreated: 2022-04-30T13:39:16.632Z
