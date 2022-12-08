@@ -2,7 +2,7 @@
 title: CentOS安装jenkins
 description: 
 published: true
-date: 2022-12-08T08:32:01.923Z
+date: 2022-12-08T08:54:39.466Z
 tags: 
 editor: markdown
 dateCreated: 2022-12-08T08:31:13.148Z
@@ -10,7 +10,7 @@ dateCreated: 2022-12-08T08:31:13.148Z
 
 # CentOS安装jenkins
 ## 安装java
-> [安装java](http://1.13.17.66:3000/zh/elk/elasticSearch/%E6%90%9C%E7%B4%A2/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2)
+> [安装java](http://1.13.17.66:3000/zh/linux/jdk%E5%AE%89%E8%A3%85)
 {.is-info}
 ## 安装jenkins
 1. 安装jenkins
