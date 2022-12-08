@@ -2,7 +2,7 @@
 title: CentOS安装jenkins
 description: 
 published: true
-date: 2022-12-08T08:31:13.148Z
+date: 2022-12-08T08:32:01.923Z
 tags: 
 editor: markdown
 dateCreated: 2022-12-08T08:31:13.148Z
@@ -68,7 +68,7 @@ cat id_rsa.pub
 ```
 再把这个新的key添加到git系统就可以了。当然，也可以copy当前用户的key过去/var/lib/jenkins/.ssh/就好了，必须记得设置文件的owner为jenkins
 2. 修改配置文件`/etc/sysconfig/jenkins`端口不生效
-解决：上述步骤6，修改`/usr/lib/systemd/system/jenkins.service`文件
+解决：上述步骤5，修改`/usr/lib/systemd/system/jenkins.service`文件
 
 
    
