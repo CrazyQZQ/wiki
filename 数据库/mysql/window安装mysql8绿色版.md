@@ -2,7 +2,7 @@
 title: windows安装mysql8绿色版
 description: windows安装mysql8绿色版
 published: true
-date: 2023-02-15T12:17:31.672Z
+date: 2023-03-23T07:23:03.507Z
 tags: 
 editor: markdown
 dateCreated: 2023-02-15T12:17:31.672Z
@@ -39,7 +39,7 @@ sc delete MySQL
 [mysqld]
 #设置端口号
 port=3306
-#设置mysql的安装目录
+#设置mysql的安装目录 报错就改成双斜杠 \\
 basedir=D:\DevTools\mysql-8.0.18-winx64
 # 设置mysql数据库的数据的存放目录
 datadir=D:\DevTools\mysql-8.0.18-winx64\data
