@@ -74,7 +74,7 @@ mysqld  --initialize-insecure --console
 ```bash
 net start mysql
 mysql -uroot -p
-user mysql
+use mysql
 ALTER USER 'root'@'localhost' IDENTIFIED BY  '123456';
 ```
 
